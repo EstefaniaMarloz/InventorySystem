@@ -1,0 +1,72 @@
+CREATE DATABASE javapos;
+USE javapos;
+
+CREATE TABLE `brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `brand` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
+); 
+
+INSERT INTO `brand` (`id`, `brand`, `status`) VALUES
+(1, 'Coca-Cola', 'Active'),
+(2, 'Peñafiel', 'Active');
+
+CREATE TABLE `cashier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
+); 
+
+INSERT INTO `cashier` (`id`, `name`, `username`, `password`, `status`) VALUES
+(1, 'Estefania', 'fany', '123', 'Active'),
+(2, 'Admin', 'admin', '123', 'Active');
+
+CREATE TABLE `warehouse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(255) NOT NULL,
+  `status` varchar(11) NOT NULL,
+  `min_product` int(11) NOT NULL,
+  `max_product` int(11) NOT NULL
+);
+
+INSERT INTO `warehouse` (`id`, `name`, `status`) VALUES
+(1, 'Plant 1', 'Active',10,100),
+(2, 'Plant 2', 'Active',5,50),
+(3, 'Plant 3', 'Active',7,75);
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `productname` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `warehouse` int(11) NOT NULL,
+  `brand` int(11) NOT NULL,
+  `costprice` int(11) NOT NULL,
+  `retailprice` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `barcode` int(11) NOT NULL,
+  `status` varchar(11) NOT NULL
+);
+
+INSERT INTO `product` (`id`, `productname`, `description`, `warehouse`, `brand`, `costprice`, `retailprice`, `qty`, `barcode`, `status`) VALUES
+(1, 'Coke', 'Coke soda', 1, 1, 20, 25, 100, 111, 'Active'),
+(2, 'Sprite', 'Sprite soda', 2, 1, 10, 15, 45, 222, 'Active');
+
+CREATE TABLE `sales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `date` varchar(255) NOT NULL,
+  `subtotal` int(11) NOT NULL,
+  `cashier` varchar(255) NOT NULL,
+  `pay` int(11) NOT NULL,
+  `balance` int(11) NOT NULL
+);
+
+CREATE TABLE `sales_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `sales_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `sell_price` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+);
